@@ -1,0 +1,11 @@
+---
+
+- name: Incluir ficheros redhat
+  include_tasks: redhat.yml
+  when: ansible_distribution == "RedHat"
+
+- name: Icluir ficheros debian
+  include_tasks: debian.yml
+  when: ansible_distribution == "Debian"
+
+...

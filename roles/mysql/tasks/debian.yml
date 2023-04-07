@@ -1,0 +1,33 @@
+---
+
+- name: Instalar gnupg
+  ansible.builtin.apt:
+    name: gnupg
+    state: present
+    update_cache: true
+
+
+- name: Agregar clave GPG de mysql Debian
+  apt_key:
+    url: https://repo.mysql.com/RPM-GPG-KEY-mysql-2022
+    state: present
+
+
+- name: Instalar repositorio mysql Debian
+  apt_repository:
+    repo: "deb http://repo.mysql.com/apt/debian/ {{ ansible_distribution_release }} mysql-8.0"
+    state: present
+
+- name: Instalar mysql-server
+  apt:
+    name: mysql-server
+    state: present
+    update_cache: true
+
+- name: Levantar servicio mysqld
+  service: 
+    name: mysqld
+    state: started
+    enabled: true
+
+...
