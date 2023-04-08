@@ -28,8 +28,9 @@
     - mysql-server
     - python3-pip
 
+
 - name: instalar PyMySQL
- ansible.builtin.pip:
+  ansible.builtin.pip:
     name: PyMySQL
     state: present
 

@@ -10,6 +10,13 @@
     - php-mysqlnd
     - php-cli
     - php-pdo
+    - php-bcmath
+    - php-gd
+    - php-intl
+    - php-json
+    - php-mbstring
+    - php-pecl-zip
+    - php-xml
   when: ansible_distribution == "CentOS"
 
 

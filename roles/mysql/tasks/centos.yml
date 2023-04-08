@@ -1,12 +1,12 @@
 ---
 
-- name: Instalar mysql-server y pip
+- name: Instalar mariadb-server y pip
   ansible.builtin.yum:
     name: "{{ item }}"
     state: present
     update_cache: true
   with_items:
-    - mysql-server
+    - mariadb-server
     - python3-pip
 
 
@@ -16,9 +16,9 @@
     state: present
 
 
-- name: levantar servicio mysql
+- name: levantar servicio mariadb
   ansible.builtin.service:
-    name: mysqld
+    name: mariadb
     state: started
     enabled: true
 
