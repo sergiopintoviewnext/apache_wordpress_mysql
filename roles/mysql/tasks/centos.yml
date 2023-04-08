@@ -22,14 +22,14 @@
 
 - name: crear db
   mysql_db:
-    name: wordpress
+    name: "{{ db_name }}"
     state: present
 
 - name: crear usuario
   mysql_user:
-    name: wordpress
-    password: 123456
-    priv: wordpress.*:ALL
+    name: "{{ db_user }}"
+    password: "{{ db_password }}"
+    priv: "{{ db_name }}.*:ALL"
     state: present
 
 ...

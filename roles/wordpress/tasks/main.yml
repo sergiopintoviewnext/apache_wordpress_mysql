@@ -1,0 +1,33 @@
+---
+
+- name: Instalacion php
+  ansible.builtin.include_tasks:
+    file: php.yml
+
+- name: Descargar, descomprimir Wordpress
+  ansible.builtin.unarchive:
+    src: "{{ version_wordpress }}"
+    dest: /var/www/html/
+    remote_src: true
+    mode: '0775'
+    owner: www-data
+    group: www-data
+  when: ansible_distribution == "Debian"
+
+
+- name: Descargar, descomprimir Wordpress
+  ansible.builtin.unarchive:
+    src: "{{ version_wordpress }}"
+    dest: /var/www/html/
+    remote_src: true
+    mode: '0775'
+    owner: apache
+    group: apache
+  when: ansible_distribution == "CentOS"
+
+
+- name: Configuracion wp-config
+  ansible.builtin.include_tasks:
+    file: wp-config.yml
+
+...

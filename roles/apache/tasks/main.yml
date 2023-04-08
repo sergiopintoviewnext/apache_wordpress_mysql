@@ -1,7 +1,7 @@
 ---
 
 - name: Incluir instalacion httpd CentOS
-  ansible.builtin.include_tasks: redhat.yml
+  ansible.builtin.include_tasks: centos.yml
   when: ansible_distribution == "CentOS"
 
 

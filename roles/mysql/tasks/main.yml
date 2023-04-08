@@ -1,7 +1,7 @@
 ---
 
-- name: Incluir ficheros redhat
-  include_tasks: redhat.yml
+- name: Incluir ficheros centos
+  include_tasks: centos.yml
   when: ansible_distribution == "CentOS"
 
 - name: Icluir ficheros debian
