@@ -7,4 +7,10 @@
     update_cache: true
   notify: Servicio apache2
 
+
+- name: Servicio apache2
+  ansible.builtin.service:
+    name: apache2
+    state: started
+    enabled: true
 ...

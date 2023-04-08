@@ -7,4 +7,16 @@
     update_cache: true
   notify: Servicio httpd
 
+- name: Servicio httpd
+  ansible.builtin.service:
+    name: httpd
+    state: started
+    enabled: true
+
+- name: permitir trafico http
+  ansible.posix.firewalld:
+    service: http
+    permanent: true
+    state: enabled
+
 ...

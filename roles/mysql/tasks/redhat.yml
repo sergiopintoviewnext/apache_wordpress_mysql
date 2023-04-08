@@ -1,24 +1,11 @@
 ---
 
-- name: Añadir repositorio postgresql Rhel8
-  ansible.builtin.yum_repository:
-    name: mysql
-    baseurl: "{{ item }}"
-    state: present
-    description: añadir repositorio mysql
-    gpgkey: https://repo.mysql.com/RPM-GPG-KEY-mysql-8.0
-  with_items:
-    - https://repo.mysql.com/yum/mysql-8.0-community/el/8/x86_64/
-
-
-- name: Instalar mysql-server y numactl-libs
-  ansible.builtin.yum:
+- name: Instalar mysql
+  yum:
     name: "{{ item }}"
     state: present
     update_cache: true
-    disable_gpg_check: true
   with_items:
-    - https://vault.centos.org/centos/8/BaseOS/x86_64/os/Packages/numactl-libs-2.0.12-13.el8.x86_64.rpm
     - mysql-server
     - python3-pip
 
@@ -27,10 +14,22 @@
     name: PyMySQL
     state: present
 
-- name: Levantar servicio mysql
+- name: levantar servicio mysql
   service:
     name: mysqld
     state: started
     enabled: true
+
+- name: crear db
+  mysql_db:
+    name: wordpress
+    state: present
+
+- name: crear usuario
+  mysql_user:
+    name: wordpress
+    password: 123456
+    priv: wordpress.*:ALL
+    state: present
 
 ...

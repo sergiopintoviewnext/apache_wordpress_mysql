@@ -1,8 +1,8 @@
 ---
 
-- name: Incluir instalacion httpd Rhel8
+- name: Incluir instalacion httpd CentOS
   ansible.builtin.include_tasks: redhat.yml
-  when: ansible_distribution == "RedHat" and ansible_distribution_major_version == "8"
+  when: ansible_distribution == "CentOS"
 
 
 - name: Incluir instalacion Debian
