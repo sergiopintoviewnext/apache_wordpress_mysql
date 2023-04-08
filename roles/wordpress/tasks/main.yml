@@ -4,6 +4,7 @@
   ansible.builtin.include_tasks:
     file: php.yml
 
+
 - name: Descargar, descomprimir Wordpress
   ansible.builtin.unarchive:
     src: "{{ version_wordpress }}"

@@ -13,6 +13,7 @@
     state: started
     enabled: true
 
+
 - name: permitir trafico http
   ansible.posix.firewalld:
     service: http

@@ -14,13 +14,13 @@
 
 
 - name: Instalar repositorio mysql Debian
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: "deb http://repo.mysql.com/apt/debian/ {{ ansible_distribution_release }} mysql-8.0"
     state: present
 
 
 - name: Instalar mysql y pip
-  apt:
+  ansible.builtin.apt:
     name: "{{ item }}"
     state: present
     update_cache: true
@@ -29,25 +29,27 @@
     - python3-pip
 
 - name: instalar PyMySQL
-  pip:
+ ansible.builtin.pip:
     name: PyMySQL
     state: present
 
 
 - name: Levantar servicio mysql
-  service:
+  ansible.builtin.service:
     name: mysql
     state: started
     enabled: true
 
+
 - name: crear db
-  mysql_db:
+  community.mysql.mysql_db:
     name: "{{ db_name }}"
     state: present
     login_unix_socket: /var/run/mysqld/mysqld.sock
 
+
 - name: crear usuario
-  mysql_user:
+  community.mysql.mysql_user:
     name: "{{ db_user }}"
     password: "{{ db_password }}"
     priv: "{{ db_name }}.*:ALL"

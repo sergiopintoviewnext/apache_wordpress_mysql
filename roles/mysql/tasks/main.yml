@@ -1,11 +1,12 @@
 ---
 
 - name: Incluir ficheros centos
-  include_tasks: centos.yml
+  ansible.builtin.include_tasks: centos.yml
   when: ansible_distribution == "CentOS"
 
+
 - name: Icluir ficheros debian
-  include_tasks: debian.yml
+  ansible.builtin.include_tasks: debian.yml
   when: ansible_distribution == "Debian"
 
 ...

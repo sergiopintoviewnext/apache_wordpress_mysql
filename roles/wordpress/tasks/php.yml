@@ -20,8 +20,9 @@
   when: ansible_distribution == "CentOS"
   changed_when: false
 
+
 - name: Instalar php en Debian
-  apt:
+  ansible.builtin.apt:
     name: "{{ item }}"
     state: present
     update_cache: true

@@ -1,7 +1,7 @@
 ---
 
-- name: Instalar mysql
-  yum:
+- name: Instalar mysql-server y pip
+  ansible.builtin.yum:
     name: "{{ item }}"
     state: present
     update_cache: true
@@ -9,24 +9,28 @@
     - mysql-server
     - python3-pip
 
+
 - name: instalar PyMySQL
-  pip:
+  ansible.builtin.pip:
     name: PyMySQL
     state: present
 
+
 - name: levantar servicio mysql
-  service:
+  ansible.builtin.service:
     name: mysqld
     state: started
     enabled: true
 
+
 - name: crear db
-  mysql_db:
+  community.mysql.mysql_db:
     name: "{{ db_name }}"
     state: present
 
+
 - name: crear usuario
-  mysql_user:
+  community.mysql.mysql_user:
     name: "{{ db_user }}"
     password: "{{ db_password }}"
     priv: "{{ db_name }}.*:ALL"
