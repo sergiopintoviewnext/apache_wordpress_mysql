@@ -1,0 +1,23 @@
+---
+# This is an example playbook to execute Ansible tests.
+
+- name: Verify
+  hosts: all
+  remote_user: root
+  gather_facts: true
+  vars_files:
+    - main.yml
+  tasks:
+  - name: Iniciar servicio
+    ansible.builtin.service:
+      name: "{{ servicio }}"
+      state: started
+    register: apache
+  
+  - name: Comprobar servicio
+    ansible.builtin.assert:
+      that: not apache.changed
+      success_msg: "{{ servicio }} corriendo"
+      fail_msg: "{{ servicio }} no esta corriendo"
+
+...

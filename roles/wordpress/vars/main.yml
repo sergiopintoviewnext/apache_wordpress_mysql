@@ -7,3 +7,12 @@ db_password: 123456
 
 # Version de wordpress
 version_wordpress: https://es.wordpress.org/latest-es_ES.tar.gz
+
+
+servicio: '{% if ansible_distribution == "Debian" %}apache2{% else %}httpd{% endif %}'
+
+
+paquetes: '{% if ansible_distribution == "Debian" %}php, php-mysql, php-cli, libapache2-mod-php{% else %}php, php-mysqlnd, php-cli, php-pdo, php-bcmath, php-gd, php-intl, php-json, php-mbstring, php-pecl-zip, php-xml{% endif %}'
+
+
+grupo_apache: '{% if ansible_distribution == "Debian" %}www-data{% else %}apache{% endif %}'

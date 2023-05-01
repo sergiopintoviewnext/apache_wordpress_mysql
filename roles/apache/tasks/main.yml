@@ -1,12 +1,16 @@
 ---
 
-- name: Incluir instalacion httpd CentOS
-  ansible.builtin.include_tasks: centos.yml
-  when: ansible_distribution == "CentOS"
+- name: Instalar apache
+  ansible.builtin.package:
+    name: "{{ servicio }}"
+    state: present
+    update_cache: true
+    
 
-
-- name: Incluir instalacion Debian
-  ansible.builtin.include_tasks: debian.yml
-  when: ansible_distribution == "Debian"
+- name: Iniciar servicio
+  ansible.builtin.service:
+    name: "{{ servicio }}"
+    state: started
+    enabled: true
 
 ...

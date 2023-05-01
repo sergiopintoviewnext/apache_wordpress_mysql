@@ -11,28 +11,8 @@
     dest: /var/www/html/
     remote_src: true
     mode: '0775'
-    owner: www-data
-    group: www-data
-  when: ansible_distribution == "Debian"
-
-
-- name: Descargar, descomprimir Wordpress
-  ansible.builtin.unarchive:
-    src: "{{ version_wordpress }}"
-    dest: /var/www/html/
-    remote_src: true
-    mode: '0775'
-    owner: apache
-    group: apache
-  when: ansible_distribution == "CentOS"
-
-
-- name: desactivar SELINUX Centos
-  ansible.builtin.lineinfile:
-    path: /etc/selinux/config
-    regexp: '^SELINUX='
-    line: SELINUX=disabled
-  when: ansible_distribution == "CentOS"
+    owner: "{{ grupo_apache }}"
+    group: "{{ grupo_apache }}"
 
 
 - name: Configuracion wp-config

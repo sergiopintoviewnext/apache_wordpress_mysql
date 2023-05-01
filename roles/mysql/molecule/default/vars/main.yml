@@ -3,4 +3,4 @@ db_name: wordpress
 db_user: wordpress
 db_password: 123456
 
-login_socket: '{% if ansible_distribution == "Debian" %}/var/run/mysqld/mysqld.sock{% endif %}'
+login_socket: '{%if ansible_distribution == "Debian" %}/var/run/mysqld/mysqld.sock{%endif%}'

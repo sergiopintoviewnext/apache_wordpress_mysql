@@ -1,0 +1,5 @@
+---
+
+servicio: '{% if ansible_distribution == "Debian" %}apache2{% else %}httpd{% endif %}'
+
+...

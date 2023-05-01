@@ -1,0 +1,8 @@
+---
+- name: Converge
+  hosts: all
+  pre_tasks:
+  tasks:  
+    - name: "Include mysql"
+      include_role:
+        name: "mysql"

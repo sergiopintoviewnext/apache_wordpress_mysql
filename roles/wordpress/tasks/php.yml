@@ -1,51 +1,16 @@
 ---
 
-- name: Instalar php en centos
-  ansible.builtin.yum:
-    name: "{{ item }}"
+- name: Instalar php
+  ansible.builtin.package:
+    name: "{{ paquetes }}"
     state: present
     update_cache: true
-  with_items:
-    - php
-    - php-mysqlnd
-    - php-cli
-    - php-pdo
-    - php-bcmath
-    - php-gd
-    - php-intl
-    - php-json
-    - php-mbstring
-    - php-pecl-zip
-    - php-xml
-  when: ansible_distribution == "CentOS"
 
 
-- name: Reiniciar servicio httpd
+- name: Reiniciar servicio httpd/apache
   ansible.builtin.service:
-    name: httpd
+    name: "{{ servicio }}"
     state: restarted
-  when: ansible_distribution == "CentOS"
-  changed_when: false
-
-
-- name: Instalar php en Debian
-  ansible.builtin.apt:
-    name: "{{ item }}"
-    state: present
-    update_cache: true
-  with_items:
-    - php
-    - php-mysql
-    - php-cli
-    - libapache2-mod-php
-  when: ansible_distribution == "Debian"
-
-
-- name: Reiniciar servicio apache
-  ansible.builtin.service:
-    name: apache2
-    state: restarted
-  when: ansible_distribution == "Debian"
   changed_when: false
 
 ...
