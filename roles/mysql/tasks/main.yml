@@ -1,5 +1,10 @@
 ---
 
+- name: Incluir variables cifradas con vault
+  ansible.builtin.include_vars:
+    file: vault.yml
+
+
 - name: Instalar mariadb-server y pip
   ansible.builtin.package:
     name: "{{ item }}"

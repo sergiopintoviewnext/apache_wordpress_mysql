@@ -6,6 +6,7 @@
   gather_facts: true
   vars_files:
     - main.yml
+    - vault.yml
   tasks:
   - name: Comprobar conexion con usuario wordpress a db wordpress
     ansible.builtin.command:
