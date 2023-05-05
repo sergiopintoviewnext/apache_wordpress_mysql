@@ -1,5 +1,10 @@
 ---
 
+- name: Incluir variables cifradas con vault
+  ansible.builtin.include_vars:
+    file: vault.yml
+
+
 - name: Instalacion php
   ansible.builtin.include_tasks:
     file: php.yml

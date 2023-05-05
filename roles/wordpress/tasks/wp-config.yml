@@ -22,27 +22,25 @@
   when: not fichero_config.stat.exists
 
 
-- name: Modificamos la linea de nombre de db para la conexion con la db
+- name: Modificamos la lineas con la configuracion para la conexion con la db
   ansible.builtin.lineinfile:
     path: /var/www/html/wordpress/wp-config.php
-    line: "define( 'DB_NAME', '{{ db_name }}' );"
-    search_string: "define( 'DB_NAME', 'database_name_here' );"
+    line: "{{ item.line }}"
+    search_string: "{{ item.search_string }}"
     state: present
+  with_items:
+    - {
+        line: "define( 'DB_NAME', '{{ db_name }}' );",
+        search_string: "define( 'DB_NAME', 'database_name_here' );"
+    }
+    - {
+        line: "define( 'DB_USER', '{{ db_user }}' );",
+        search_string: "define( 'DB_USER', 'username_here' );"
+    }
+    - {
+        line: "define( 'DB_PASSWORD', '{{ db_password }}' );",
+        search_string: "define( 'DB_PASSWORD', 'password_here' );"      
+    }
 
-
-- name: Modificamos la linea de usuario para la conexion con la db
-  ansible.builtin.lineinfile:
-    path: /var/www/html/wordpress/wp-config.php
-    line: "define( 'DB_USER', '{{ db_user }}' );"
-    search_string: "define( 'DB_USER', 'username_here' );"
-    state: present
-
-
-- name: Modificamos la linea de password para la conexion con la db
-  ansible.builtin.lineinfile:
-    path: /var/www/html/wordpress/wp-config.php
-    line: "define( 'DB_PASSWORD', '{{ db_password }}' );"
-    search_string: "define( 'DB_PASSWORD', 'password_here' );"
-    state: present
 
 ...
